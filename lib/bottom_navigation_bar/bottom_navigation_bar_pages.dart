@@ -41,7 +41,10 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () => context.pushRoute(ProfileDetailRoute()), child: Text('go to profile details route'));
+      key: ValueKey('profile_detail'),
+      onPressed: () => context.pushRoute(ProfileDetailRoute()),
+      child: Text('go to profile details route'),
+    );
   }
 }
 
@@ -60,7 +63,10 @@ class FlowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () => context.pushRoute(FlowDetailRoute()), child: Text('go to flow details route'));
+      key: ValueKey('flow_detail'),
+      onPressed: () => context.pushRoute(FlowDetailRoute()),
+      child: Text('go to flow details route'),
+    );
   }
 }
 

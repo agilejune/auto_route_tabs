@@ -43,19 +43,24 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
+              key: ValueKey('books'),
               onPressed: () => context.replaceRoute(BooksWrapperRoute()),
               child: Text('/books nested router replace'),
             ),
             ElevatedButton(
+              key: ValueKey('login'),
               onPressed: () => context.pushRoute(LoginWrapperRoute()),
               child: Text('/login declarative router'),
             ),
             ElevatedButton(
+              key: ValueKey('auth'),
               onPressed: () => context.pushRoute(AuthFlowWrapperRoute()),
               child: Text('/auth declarative router'),
             ),
             ElevatedButton(
-              onPressed: () => context.navigateTo(BottomNavigationBarWrapperRoute()),
+              key: ValueKey('bottom-navigation-bar'),
+              onPressed: () =>
+                  context.navigateTo(BottomNavigationBarWrapperRoute()),
               child: Text('/bottom-navigation-bar auto tabs scaffold router'),
             ),
           ],

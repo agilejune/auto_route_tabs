@@ -12,8 +12,8 @@ class LoginModel {
 
 class LoginStateNotifier extends StateNotifier<LoginModel> {
   LoginStateNotifier(LoginModel state) : super(state);
-  static final provider =
-      StateNotifierProvider<LoginStateNotifier, LoginModel>((_) => LoginStateNotifier(LoginModel("", "")));
+  static final provider = StateNotifierProvider<LoginStateNotifier, LoginModel>(
+      (_) => LoginStateNotifier(LoginModel("", "")));
 
   void updateMail() => state = LoginModel('email', '');
 }
@@ -27,7 +27,10 @@ class LoginWrapperPage extends ConsumerWidget {
           title: Text('${loginState.email}'),
         ),
         body: AutoRouter.declarative(routes: (context) {
-          return [EmailRoute(), if (loginState.email!.isNotEmpty) PasswordRoute()];
+          return [
+            EmailRoute(),
+            if (loginState.email!.isNotEmpty) PasswordRoute()
+          ];
         }));
   }
 }
@@ -39,7 +42,9 @@ class EmailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () => context.read(LoginStateNotifier.provider.notifier).updateMail(),
+        key: ValueKey('email'),
+        onPressed: () =>
+            context.read(LoginStateNotifier.provider.notifier).updateMail(),
         child: Text('Email'),
       ),
     );

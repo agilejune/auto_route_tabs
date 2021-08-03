@@ -10,6 +10,15 @@ class AuthPageRoutesNotifier extends StateNotifier<List<PageRouteInfo>> {
     });
   }
 
+  AuthPageRoutesNotifier.test({required int seconds, required bool isLogin})
+      : super([SplashRoute()]) {
+    Future.delayed(Duration(seconds: seconds), () => isLogin).then((isLogin) {
+      state.remove(0);
+      state = [...state, isLogin ? ProtectedRoute() : AuthRoute()];
+    });
+  }
+
   static final provider =
-      StateNotifierProvider<AuthPageRoutesNotifier, List<PageRouteInfo>>((_) => AuthPageRoutesNotifier());
+      StateNotifierProvider<AuthPageRoutesNotifier, List<PageRouteInfo>>(
+          (_) => AuthPageRoutesNotifier());
 }

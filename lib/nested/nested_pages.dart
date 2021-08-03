@@ -33,6 +33,7 @@ class BooksPage extends StatelessWidget {
       child: SizedBox(
         height: 100,
         child: ElevatedButton(
+          key: ValueKey('details'),
           onPressed: () => context.pushRoute(BookDetailsRoute(bookId: 3)),
           child: Text('/books/3 with pushRoute'),
         ),

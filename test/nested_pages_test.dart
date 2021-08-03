@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_route_example/nested/nested_pages.dart';
 import 'package:auto_route_example/main.dart' as app;
 import 'package:flutter/material.dart';
@@ -45,8 +46,31 @@ void main() {
     final page = tester.widget<BookDetailsPage>(pageFinder);
     expect(page.bookId, equals(3));
     expect(page.author, isNull);
+    final context = tester.state(pageFinder).context;
+    AutoRouter.of(context).pop();
 
     expect(find.textContaining('3'), findsOneWidget);
     expect(find.textContaining('null'), findsOneWidget);
+  });
+
+  testWidgets("BookDetailsPage should be able to back",
+      (WidgetTester tester) async {
+    await navigateToBooksPage(tester);
+
+    expect(find.byType(BooksPage), findsOneWidget);
+
+    final buttonFinder = find.byKey(ValueKey('details'));
+    expect(buttonFinder, findsOneWidget);
+
+    await tester.tap(buttonFinder);
+    await tester.pumpAndSettle();
+
+    final pageFinder = find.byType(BookDetailsPage);
+    expect(pageFinder, findsOneWidget);
+
+    await tester.element(pageFinder).popRoute();
+    await tester.pumpAndSettle();
+
+    expect(find.byType(BooksPage), findsOneWidget);
   });
 }

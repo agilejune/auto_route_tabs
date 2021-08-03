@@ -46,8 +46,6 @@ void main() {
     final page = tester.widget<BookDetailsPage>(pageFinder);
     expect(page.bookId, equals(3));
     expect(page.author, isNull);
-    final context = tester.state(pageFinder).context;
-    AutoRouter.of(context).pop();
 
     expect(find.textContaining('3'), findsOneWidget);
     expect(find.textContaining('null'), findsOneWidget);
